@@ -62,14 +62,24 @@
 
                 </form>
             </section>
+<?php 
+
+if(isset($_POST["submit1"]))
+{
+    $link = mysqli_connect("localhost","root", "ghksdl");
+    mysqli_select_db($link, "lms");
+
+    mysqli_query($link,"INSERT INTO `student_registration` (`id`, `firstname`, `lastname`, `username`, `password`, `email`, `contact`, `sem`, `enrollment`) VALUES (NULL, 'test1', 'test1', 'test1', '12341', 'test1@gmail.com', '4123321234', '112', '1234');");
+
+    echo "done";
+}
 
 
+?>
 
     </div>
 
-    <div class="alert alert-success col-lg-6 col-lg-push-3">
-        Registration successfully, You will get email when your account is approved
-    </div>
+
 
 
 </body>
