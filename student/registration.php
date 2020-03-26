@@ -1,3 +1,7 @@
+<?php 
+include "connection.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,12 +70,18 @@
 
 if(isset($_POST["submit1"]))
 {
-    $link = mysqli_connect("localhost","root", "ghksdl");
-    mysqli_select_db($link, "lms");
 
-    mysqli_query($link,"INSERT INTO `student_registration` (`id`, `firstname`, `lastname`, `username`, `password`, `email`, `contact`, `sem`, `enrollment`) VALUES (NULL, 'test1', 'test1', 'test1', '12341', 'test1@gmail.com', '4123321234', '112', '1234');");
 
-    echo "done";
+    mysqli_query($link,"INSERT INTO `student_registration` (`id`, `firstname`, `lastname`, `username`, `password`, `email`, `contact`, `sem`, `enrollment`) 
+    VALUES (NULL, '$_POST[firstname]', '$_POST[lastname]', '$_POST[username]', '$_POST[password]', '$_POST[email]', '$_POST[contact]', '$_POST[sem]', '$_POST[enrollmentno]');");
+?>
+
+    <div class="alert alert-success ">
+        Registration successfully, You will get email when your account is approved
+    </div>
+
+<?php
+
 }
 
 
