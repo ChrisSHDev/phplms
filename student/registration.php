@@ -72,8 +72,8 @@ if(isset($_POST["submit1"]))
 {
 
 
-    mysqli_query($link,"INSERT INTO `student_registration` (`id`, `firstname`, `lastname`, `username`, `password`, `email`, `contact`, `sem`, `enrollment`) 
-    VALUES (NULL, '$_POST[firstname]', '$_POST[lastname]', '$_POST[username]', '$_POST[password]', '$_POST[email]', '$_POST[contact]', '$_POST[sem]', '$_POST[enrollmentno]');");
+    mysqli_query($link,"INSERT INTO `student_registration` (`id`, `firstname`, `lastname`, `username`, `password`, `email`, `contact`, `sem`, `enrollment`, `status`) 
+    VALUES (NULL, '$_POST[firstname]', '$_POST[lastname]', '$_POST[username]', '$_POST[password]', '$_POST[email]', '$_POST[contact]', '$_POST[sem]', '$_POST[enrollmentno]', 'no');");
 ?>
 
     <div class="alert alert-success ">

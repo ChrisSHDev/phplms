@@ -86,7 +86,7 @@
 ?>
 
     <script type="text/javascript">
-        window.location="aa.php";
+        window.location="display_student_info.php";
     </script>
 
 <?php
