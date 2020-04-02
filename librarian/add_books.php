@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include "connection.php";
     include "header.php";
 ?>
@@ -74,7 +75,23 @@
 
 <?php 
     if(isset($_POST["submit1"])){
-        echo "hello";
+
+        $destination_path = getcwd().DIRECTORY_SEPARATOR;
+        $tm=md5(time());
+        $fnm= $_FILES["fl"]["name"];
+        $dst= $destination_path."./books_image/".$tm.$fnm;
+        $dst1="books_image/".$tm.$fnm;
+
+        move_uploaded_file($_FILES["fl"]["tmp_name"], $dst);
+
+        mysqli_query($link,"INSERT INTO `add_books` (`id`, `books_name`, `books_image`, `books_author_name`, `books_publication_name`, `books_purchase_date`, `books_price`, `books_qty`, `available_qty`, `librarian_username`) 
+                                            VALUES (NULL, '$_POST[booksname]', '$dst1', '$_POST[booksauthorname]', '$_POST[pname]', '$_POST[bpurchasedt]', '$_POST[bprice]', '$_POST[bqty]', '$_POST[aqty]', '$_SESSION[librarian]');" );
+     ?>
+        <script type="text/javascript">
+            alert("books insert successfully");
+        </script>
+
+     <?php                                       
     }    
 ?>
 

@@ -1,5 +1,6 @@
 <?php 
     include "connection.php";
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +84,7 @@
 <?php
         }
         else{
+            $_SESSION["librarian"]=$_POST["username"];
 ?>
 
     <script type="text/javascript">
