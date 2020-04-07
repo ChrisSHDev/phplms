@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include "connection.php";
 ?>
 
@@ -84,10 +85,11 @@
 <?php
         }
         else{
+            $_SESSION["username"] = $_POST["username"];
 ?>
 
     <script type="text/javascript">
-        window.location="aa.php";
+        window.location="my_issued_books.php";
     </script>
 
 <?php
