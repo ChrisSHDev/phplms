@@ -108,7 +108,7 @@
                                                             $res=mysqli_query($link, "select books_name from add_books");
                                                             while($row=mysqli_fetch_array($res))
                                                             {
-                                                                echo "<option value=>";
+                                                                echo "<option>";
                                                                     echo $row["books_name"];
                                                                 echo "</option>";
                                                             }
@@ -143,15 +143,42 @@
                                 <?php 
                                     if(isset($_POST["submit2"]))
                                     {
-                                        mysqli_query($link,"INSERT INTO `issue_books` (`id`, `student_enrollment`, `student_name`, `student_sem`, `student_contact`, `student_email`, `books_name`, `books_issue_date`, `books_return_date`, `student_username`) 
+                                        $qty=0;
+
+                                        $res=mysqli_query($link, "select * from add_books where books_name= '$_POST[booksname]'");
+
+                                        while($row=mysqli_fetch_array($res))
+                                        {
+                                            $qty=$row["available_qty"];
+                                        }
+
+                                        if($qty==0){
+                                                        ?>
+                    
+                                        <div class="alert alert-danger col-lg-6 col-lg-push-3">
+                                            <strong style="color:white">This book is not available</strong>
+                                        </div>
+
+                                        <?php
+                                        }
+
+                                        else{
+                                            mysqli_query($link,"INSERT INTO `issue_books` (`id`, `student_enrollment`, `student_name`, `student_sem`, `student_contact`, `student_email`, `books_name`, `books_issue_date`, `books_return_date`, `student_username`) 
                                             VALUES (NULL, '$_SESSION[enrollment]', '$_POST[studentname]', '$_POST[studentsem]', '$_POST[studentcontact]', '$_POST[studentemail]', '$_POST[booksname]', '$_POST[booksissuedate]', '', '$_SESSION[susername]');" );
-                                    
+                                        var_dump($_POST['booksname']);
+                                        //mysqli_query($link,"UPDATE `add_books` SET `available_qty` = 999 WHERE `books_name`='$_POST[booksname]';");
+                                        mysqli_query($link,"UPDATE `add_books` SET `available_qty` = 'available_qty-1' WHERE `books_name` = '$_POST[booksname]';");
                                     ?>
                                             <script type="text/javascript">
                                                 alert("books issued successfully");
                                                 //window.location.href=window.location.href;
                                             </script>
                                     <?php
+
+                                            
+                                        }
+
+
                                 
                                     }
                                 
