@@ -1,6 +1,7 @@
 <?php 
-    include "connection.php";
     include "header.php";
+    include "connection.php";
+    mysqli_query($link, "UPDATE messages set read1='y' where dusername='$_SESSION[username]'");
 ?>
 
         <!-- page content area main -->
@@ -8,7 +9,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>My Issued Books</h3>
+                        <h3>Plain Page</h3>
                     </div>
 
                     <div class="title_right">
@@ -28,38 +29,34 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Plain Page</h2>
+                                <h2>Message list</h2>
 
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
                                 <table class="table table-bordered">
-                                    <th>
-                                        Student Enrollment No
-                                    </th>
-                                    <th>
-                                        Books Name
-                                    </th>
-                                    <th>
-                                        Books Issue Date
-                                    </th>
+                                    <tr>
+                                        <th>Rebrarian Name</th>
+                                        <th>Title</th>
+                                        <th>Message</th>
+                                    </tr>
 
                                     <?php 
-                                        $res=mysqli_query($link, "select * from issue_books where student_username='$_SESSION[username]'");
-                                        while( $row = mysqli_fetch_array($res))
+                                        $res=mysqli_query($link, "select * from messages where dusername='$_SESSION[username]' order by id desc");
+
+                                        while($row=mysqli_fetch_array($res))
                                         {
+                                            $res1=mysqli_query($link, "select * from librarian_registration where username='$row[susername]'");
+                                            while($row1=mysqli_fetch_array($res1))
+                                            {
+                                                $fullname=$row1["firstname"]." ".$row1["lastname"];
+                                            }
+
                                             echo "<tr>";
-                                            echo "<td>";
-                                                echo $row["student_enrollment"];
-                                            echo "</td>";
-
-                                            echo "<td>";
-                                                echo $row["books_name"];
-                                            echo "</td>";
-
-                                            echo "<td>";
-                                                echo $row["books_issue_date"];
-                                            echo "</td>";
+                                            echo "<td>"; echo $fullname; echo "</td>";
+                                            echo "<td>"; echo $row["title"]; echo "</td>";
+                                            echo "<td>"; echo $row["msg"]; echo "</td>";
+                                            echo "</tr>";
                                         }
                                     ?>
                                 </table>

@@ -61,7 +61,7 @@
                             <li><a href="issue_books.php"><i class="fa fa-table"></i> Issue books <span class="fa fa-chevron-down"></span></a>
 
                             </li>
-                            <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span
+                            <li><a href="send_notification_student.php"><i class="fa fa-mail-forward"></i>Send Message to Student <span
                                     class="fa fa-chevron-down"></span></a>
 
                             </li>
