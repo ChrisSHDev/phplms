@@ -85,6 +85,7 @@
         }
         else{
             $_SESSION["librarian"]=$_POST["username"];
+            
 ?>
 
     <script type="text/javascript">

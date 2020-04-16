@@ -1,7 +1,19 @@
 <?php 
+    session_start();
+
+    if(!isset($_SESSION["librarian"]))
+    {
+        ?>
+            <script type="text/javascript">
+                window.location="login.php";
+            </script>
+        <?php
+    }
     include "connection.php";
     include "header.php";
+
 ?>
+
 
         <!-- page content area main -->
         <div class="right_col" role="main">
@@ -53,6 +65,7 @@
                                         echo "<th>"; echo "Books Price"; echo "</th>";
                                         echo "<th>"; echo "Books Quantity"; echo "</th>";
                                         echo "<th>"; echo "Available Quantity"; echo "</th>";
+                                        echo "<th>"; echo "Delete Books"; echo "</th>";
                                         echo "</tr>";
                                         while($row=mysqli_fetch_array($res)){
                                             echo "<tr>";
@@ -64,6 +77,11 @@
                                                 echo "<td>"; echo $row["books_price"]; echo "</td>";
                                                 echo "<td>"; echo $row["books_qty"]; echo "</td>";
                                                 echo "<td>"; echo $row["available_qty"]; echo "</td>";
+                                                echo "<td>"; 
+                                                ?>
+                                                <a href="delete_books.php?id=<?php echo $row["id"]; ?>">Delete</a> 
+                                                
+                                                <?php echo "</td>";
                                             echo "</tr>";
                                         }
                                     }
@@ -81,8 +99,10 @@
                                         echo "<th>"; echo "Books Price"; echo "</th>";
                                         echo "<th>"; echo "Books Quantity"; echo "</th>";
                                         echo "<th>"; echo "Available Quantity"; echo "</th>";
+                                        echo "<th>"; echo "Delete Books"; echo "</th>";
                                         echo "</tr>";
                                         while($row=mysqli_fetch_array($res)){
+
                                             echo "<tr>";
                                                 echo "<td>"; ?> <img src="<?php echo $row['books_image']; ?>" height="100" width="100"> <?php echo "</td>";
                                                 echo "<td>"; echo $row["books_name"]; echo "</td>";
@@ -92,6 +112,12 @@
                                                 echo "<td>"; echo $row["books_price"]; echo "</td>";
                                                 echo "<td>"; echo $row["books_qty"]; echo "</td>";
                                                 echo "<td>"; echo $row["available_qty"]; echo "</td>";
+
+                                                echo "<td>"; 
+                                                ?>
+                                                <a href="delete_books.php?id=<?php echo $row["id"]; ?>">Delete</a> 
+                                                
+                                                <?php echo "</td>";
                                             echo "</tr>";
                                         }
                                     }

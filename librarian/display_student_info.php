@@ -1,6 +1,17 @@
 <?php 
-    include "header.php";
+    session_start();
+
+    if(!isset($_SESSION["librarian"]))
+    {
+        ?>
+            <script type="text/javascript">
+                window.location="login.php";
+            </script>
+        <?php
+    }
     include "connection.php";
+    include "header.php";
+
 ?>
 
         <!-- page content area main -->
